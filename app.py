@@ -3,9 +3,11 @@ from typing import Any, Dict
 from fastapi import FastAPI, HTTPException, Request
 from langchain.chat_models import ChatOpenAI
 from langserve import add_routes
-
+from dotenv import load_dotenv
 
 app = FastAPI()
+
+load_dotenv('.env')
 
 
 def verify_secret_key(config: Dict[str, Any], req: Request) -> Dict[str, Any]:
@@ -25,4 +27,4 @@ add_routes(
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=int(
-        os.getenv("PORT", default=8000)))
+        os.getenv("PORT", default=8001)))
